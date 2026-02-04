@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ask ChatGPT</title>
+
+  <!-- Mets ton CSS si tu en as un -->
+  <link rel="stylesheet" href="/ask/css/ask.css" />
+  <script src="/ask/js/ask.js" defer></script>
+  <script src="/ask/js/audio.js" defer></script>
+ 
+ <link rel="manifest" href="/ask/manifest.json">
+ <meta name="theme-color" content="#2c6e49">
+
+</head>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/ask/service-worker.js");
+}
+</script>
+
+<body>
+  <div id="app">
+
+    <!-- LEFT: Prompt Library -->
+    <aside id="sidebar">
+      <div class="side-head">
+        <h3>Prompts  សួរអេអាយ(AI) គ្រប់ចម្ងល់</h3>
+      </div>
+      <div>
+        Langue de Reponse : 
+        <select id="langSel" aria-label="Langue">
+          <option value="fr">Français</option>
+          <option value="en">English</option>
+          <option value="kh">ខ្មែរ</option>
+        </select>
+        </div>
+        <div>
+        Selection un prompt existant :
+        <select id="promptPick" aria-label="Nom du prompt">
+          <!-- rempli par JS -->
+        </select>
+      </div>
+      <div class="side-actions">
+      </div>
+    </aside>
+
+    <!-- RIGHT: Editor + Ask -->
+    <main id="main">
+
+      <!-- TOP BAR: one line -->
+      <header id="topbar">
+      </header>
+
+      <!-- BOTTOM: prompt + answer -->
+      <section id="panes">
+
+        <div class="pane">
+          <div class="pane-head">
+            <strong>Prompt (édition)     Prompt selectionné </strong>
+            <span class="spacer"></span>
+            <input id="promptTitle" type="text" placeholder="Titre du prompt" />
+            <button id="btnNewPrompt" type="button">+Nouveau</button>
+            <button id="btnSavePrompt" type="button">Sauver</button>
+            <button id="btnDeletePrompt" type="button">Supprimer</button>
+            <button id="sendBtn" type="button">Envoyer</button>
+            <button id="btnSpeak" type="button">🔊 Lire</button>
+            <button id="btnTTS" type="button" disabled>🎙️ Audio (XTTS/MMS)</button>
+            <button id="btnInstall" type="button" hidden>Installer</button>
+
+
+          </div>
+
+          <textarea id="promptText" rows="10" placeholder="Écris/colle ton prompt ici…"></textarea>
+        </div>
+
+        <div class="pane">
+          <div class="pane-head">
+            <strong>Réponse  នេះជាចម្លើយរបស់ អេអាយ (AI) </strong>
+            <span class="spacer"></span>
+            <div id="loading" hidden>⏳ Réflexion…</div>
+            <button id="btnCopyAnswer" type="button">Copier</button>
+            <button id="btnClearAnswer" type="button">Effacer</button>
+          </div>
+
+          <textarea id="answerText" rows="14" readonly placeholder="La réponse s’affiche ici…"></textarea>
+          <audio id="audioPlayer" controls style="width:100%; margin-top:10px;" hidden></audio>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+</body>
+</html>
